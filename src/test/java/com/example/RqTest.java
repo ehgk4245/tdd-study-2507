@@ -84,4 +84,17 @@ class RqTest {
         // then
         assertThat(rs).isEqualTo("홍길동");
     }
+    
+    @Test
+    @DisplayName("등록?이름=홍길동&고향=남원&성별=남성 : rq.getParam(\"성별\", \"\")")
+    void t7() {
+        // given
+        Rq rq = new Rq("등록?이름=홍길동&고향=남원&성별=남성");
+
+        // when
+        String rs = rq.getParam("성별", "");
+
+        // then
+        assertThat(rs).isEqualTo("남성");
+    }
 }
