@@ -25,9 +25,7 @@ public class Rq {
         Arrays.stream(cmdBits[1].split("&"))
                 .map(str -> str.split("=", 2))
                 .filter(paramBits -> paramBits.length > 1 && !paramBits[1].isEmpty())
-                .forEach(paramBits -> {
-                    params.put(paramBits[0], paramBits[1]);
-                });
+                .forEach(paramBits -> params.put(paramBits[0], paramBits[1]));
     }
 
     public String getActionName() {
