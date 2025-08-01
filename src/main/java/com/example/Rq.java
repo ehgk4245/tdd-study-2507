@@ -1,34 +1,40 @@
 package com.example;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Rq {
 
     private final String cmd;
-    private final Map<String, String> map = new HashMap<>();
+    private String actionName;
+    private final Map<String, String> params = new HashMap<>();
 
     public Rq(String cmd) {
         this.cmd = cmd;
+        init();
+    }
+
+    private void init() {
+        if (!cmd.contains("?")) {
+            actionName = cmd;
+            return;
+        }
+        String[] cmdBits = cmd.split("\\?", 2);
+        actionName = cmdBits[0];
+        Arrays.stream(cmdBits[1].split("&"))
+                .filter(str -> str.contains("="))
+                .forEach(str -> {
+                    String[] paramBits = str.split("=", 2);
+                    params.put(paramBits[0], paramBits[1]);
+                });
     }
 
     public String getActionName() {
-        String[] cmdBits = cmd.split("\\?", 2);
-        return cmdBits[0];
+        return actionName;
     }
 
     public String getParam(String key, String defaultValue) {
-        if (!cmd.contains("?")) return defaultValue;
-        String queryString = cmd.split("\\?", 2)[1];
-        String[] queryStringBits = queryString.split("&");
-        for (String param : queryStringBits) {
-            String[] paramBits = param.split("=", 2);
-            String paramName = paramBits[0];
-            String paramValue = paramBits[1];
-            if (key.equals(paramName)) {
-                return paramValue;
-            }
-        }
-        return defaultValue;
+        return params.getOrDefault(key, defaultValue);
     }
 }
