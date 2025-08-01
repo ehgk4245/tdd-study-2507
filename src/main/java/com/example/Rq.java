@@ -39,6 +39,11 @@ public class Rq {
     }
 
     public int getParamAsInt(String key, int defaultValue) {
-        return Integer.parseInt(params.get(key));
+        String paramValue = getParam(key, String.valueOf(defaultValue));
+        try {
+            return Integer.parseInt(paramValue);
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
     }
 }
