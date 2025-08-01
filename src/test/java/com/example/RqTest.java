@@ -136,4 +136,14 @@ class RqTest {
         //then
         assertThat(paramValue).isEqualTo("모름");
     }
+
+    @Test
+    @DisplayName("\"목록?page=2\" : rq.getParamAsInt(\"page\", 1)")
+    void t11() {
+        Rq rq = new Rq("목록?page=2");
+
+        int value = rq.getParamAsInt("page", 1);
+
+        assertThat(value).isEqualTo(2);
+    }
 }
