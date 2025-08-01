@@ -18,10 +18,14 @@ public class Rq {
     }
 
     public String getParam(String key, String defaultValue) {
-        String[] cmdBits = cmd.split("\\?", 2);
-        if (cmdBits.length > 1) {
-            String[] paramBits = cmdBits[1].split("=", 2);
-            return paramBits[1];
+        if (!cmd.contains("?")) return defaultValue;
+        String queryString = cmd.split("\\?", 2)[1];
+        String[] queryStringBits = queryString.split("&");
+        for (String param : queryStringBits) {
+            String[] paramBits = param.split("=", 2);
+            if (key.equals(paramBits[0])) {
+                return paramBits[1];
+            }
         }
         return defaultValue;
     }
