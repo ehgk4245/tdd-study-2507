@@ -138,12 +138,28 @@ class RqTest {
     }
 
     @Test
-    @DisplayName("\"목록?page=2\" : rq.getParamAsInt(\"page\", 1)")
+    @DisplayName("목록?page=2 : rq.getParamAsInt(\"page\", 1)")
     void t11() {
+        // given
         Rq rq = new Rq("목록?page=2");
 
+        // when
         int value = rq.getParamAsInt("page", 1);
 
+        // then
         assertThat(value).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("목록?page=2번 : rq.getParamAsInt(\"page\", 1)")
+    void t12() {
+        // given
+        Rq rq = new Rq("목록?page=2번");
+
+        // when
+        int value = rq.getParamAsInt("page", 1);
+
+        // then
+        assertThat(value).isEqualTo(1);
     }
 }
