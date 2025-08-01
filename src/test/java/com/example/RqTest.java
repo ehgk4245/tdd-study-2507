@@ -97,4 +97,43 @@ class RqTest {
         // then
         assertThat(rs).isEqualTo("남성");
     }
+
+    @Test
+    @DisplayName("등록?성별= : rq.getParam(\"성별\", \"모름\")")
+    void t8() {
+        // given
+        Rq rq = new Rq("등록?성별=");
+
+        // when
+        String paramValue = rq.getParam("성별", "모름");
+
+        // then
+        assertThat(paramValue).isEqualTo("모름");
+    }
+
+    @Test
+    @DisplayName("등록?성별 : rq.getParam(\"성별\", \"모름\")")
+    void t9() {
+        // given
+        Rq rq = new Rq("등록?성별");
+
+        // when
+        String paramValue = rq.getParam("성별", "모름");
+
+        // then
+        assertThat(paramValue).isEqualTo("모름");
+    }
+
+    @Test
+    @DisplayName("등록 : rq.getParam(\"성별\", \"모름\")")
+    void t10() {
+        // given
+        Rq rq = new Rq("등록");
+
+        // when
+        String paramValue = rq.getParam("성별", "모름");
+
+        //then
+        assertThat(paramValue).isEqualTo("모름");
+    }
 }
