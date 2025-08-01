@@ -23,8 +23,10 @@ public class Rq {
         String[] queryStringBits = queryString.split("&");
         for (String param : queryStringBits) {
             String[] paramBits = param.split("=", 2);
-            if (key.equals(paramBits[0])) {
-                return paramBits[1];
+            String paramName = paramBits[0];
+            String paramValue = paramBits[1];
+            if (key.equals(paramName)) {
+                return paramValue;
             }
         }
         return defaultValue;
