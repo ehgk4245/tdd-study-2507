@@ -37,4 +37,8 @@ public class Rq {
     public String getParam(String key, String defaultValue) {
         return params.getOrDefault(key, defaultValue);
     }
+
+    public int getParamAsInt(String key, int defaultValue) {
+        return Integer.parseInt(params.get(key));
+    }
 }
