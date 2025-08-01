@@ -23,9 +23,9 @@ public class Rq {
         String[] cmdBits = cmd.split("\\?", 2);
         actionName = cmdBits[0];
         Arrays.stream(cmdBits[1].split("&"))
-                .filter(str -> str.contains("="))
-                .forEach(str -> {
-                    String[] paramBits = str.split("=", 2);
+                .map(str -> str.split("=", 2))
+                .filter(paramBits -> paramBits.length > 1 && !paramBits[1].isEmpty())
+                .forEach(paramBits -> {
                     params.put(paramBits[0], paramBits[1]);
                 });
     }
