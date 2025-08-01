@@ -19,7 +19,10 @@ public class Rq {
 
     public String getParam(String key, String defaultValue) {
         String[] cmdBits = cmd.split("\\?", 2);
-        String[] paramBits = cmdBits[1].split("=", 2);
-        return paramBits[1];
+        if (cmdBits.length > 1) {
+            String[] paramBits = cmdBits[1].split("=", 2);
+            return paramBits[1];
+        }
+        return defaultValue;
     }
 }
